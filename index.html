@@ -24,7 +24,7 @@ h2{margin:0 0 6px;font-size:1.15rem}
 p{margin:6px 0;line-height:1.55}
 .mu{color:var(--mu)}
 .big{font-size:clamp(1.8rem,7vw,2.6rem);line-height:1.3;margin:8px 0 2px}
-.py{color:var(--mu);font-size:1.05rem}
+.py{color:var(--tx);font-size:1.25rem;font-weight:600}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
 .s{border:0;border-radius:18px;padding:16px 8px;color:#fff;font-size:1.7rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:96px;touch-action:manipulation}
 .s small{font-family:inherit;font-size:.8rem;opacity:.92}
@@ -36,17 +36,17 @@ p{margin:6px 0;line-height:1.55}
 .btn.alt{background:transparent;color:var(--tx);border:2px solid var(--ln)}
 .say{border:2px solid var(--ln);background:transparent;color:var(--tx);border-radius:999px;padding:6px 14px;font-size:1rem;cursor:pointer;margin-top:6px}
 .tm{height:6px;background:var(--ln);border-radius:9px;overflow:hidden;margin:12px 0 0}
-.tm i{display:block;height:100%;background:var(--su);width:100%;transform-origin:left;animation:t 8s linear forwards}
+.tm i{display:block;height:100%;background:var(--su);width:100%;transform-origin:left;animation:t 20s linear forwards}
 @keyframes t{to{transform:scaleX(0)}}
 .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
 @media(min-width:560px){.cards{grid-template-columns:repeat(4,1fr)}}
 .c{border:2px solid var(--ln);background:var(--bg);color:var(--tx);border-radius:16px;padding:12px 6px;cursor:pointer;font-family:inherit;touch-action:manipulation}
-.c .e{font-size:2rem;display:block}.c .z{font-size:1.35rem;display:block}.c .p{font-size:.78rem;color:var(--mu);display:block}
+.c .e{font-size:2rem;display:block}.c .z{font-size:1.35rem;display:block}.c .p{font-size:.95rem;font-weight:600;color:var(--tx);display:block}
 .c.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 22%,var(--card));pointer-events:none}
 .c.bad{border-color:var(--no);animation:sh .35s;pointer-events:none;opacity:.5}
 @keyframes sh{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
 .opt{display:block;width:100%;text-align:left;border:2px solid var(--ln);background:var(--bg);color:var(--tx);border-radius:16px;padding:12px 16px;margin-top:10px;cursor:pointer;font-family:inherit;touch-action:manipulation}
-.opt .z{font-size:1.4rem;display:block}.opt .p{font-size:.85rem;color:var(--mu)}
+.opt .z{font-size:1.4rem;display:block}.opt .p{font-size:1rem;font-weight:600;color:var(--tx)}
 .opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 22%,var(--card))}
 .opt.bad{border-color:var(--no);animation:sh .35s}
 .bk{position:relative}
@@ -92,20 +92,20 @@ var $=document.getElementById('app'),sc=0,lv=0,qi=0,items=[],tmr=0,t0=0,sound=tr
 function sh(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=a[i];a[i]=a[j];a[j]=x}return a}
 function say(t){if(!sound||!window.speechSynthesis)return;try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';u.rate=.8;speechSynthesis.speak(u)}catch(e){}}
 function hd(n,max){return '<div class="top"><span class="pill">ด่าน '+lv+'/3</span><span class="pill">⭐ '+sc+'</span><button class="say" style="margin:0" onclick="sound=!sound;this.textContent=sound?\'🔊\':\'🔇\'">'+(sound?'🔊':'🔇')+'</button></div><div class="bar"><i style="width:'+Math.round(n/max*100)+'%"></i></div>'}
-function seasonBtns(fn){return '<div class="grid">'+KEYS.map(function(k){var s=S[k];return '<button class="s '+s.k+'" data-k="'+k+'" onclick="'+fn+'(\''+k+'\')"><span>'+s.e+'</span><span class="zh">'+s.z+'</span><small>'+s.p+' · '+s.t+'</small></button>'}).join('')+'</div>'}
+function seasonBtns(fn){return '<div class="grid">'+KEYS.map(function(k){var s=S[k];return '<button class="s '+s.k+'" data-k="'+k+'" onclick="'+fn+'(\''+k+'\')"><span>'+s.e+'</span><span class="zh">'+s.z+'</span><small>'+s.p+'</small></button>'}).join('')+'</div>'}
 
 function home(){sc=0;lv=0;clearTimeout(tmr);
-$.innerHTML='<div class="card"><div class="hdr"><span>🌸</span><span>☀️</span><span>🍂</span><span>❄️</span></div><h1 class="zh">四季大冒险</h1><p class="py">Sìjì dà màoxiǎn</p><h2>ผจญภัยสี่ฤดู</h2><p class="mu">3 ด่าน ฟัง–แตะ–พูดตาม<br>เหมาะกับนักเรียน HSK 1 เล่นเดี่ยวหรือฉายขึ้นจอแล้วแข่งเป็นทีม</p><p class="mu" style="font-size:.9rem">💡 เปิดเสียงเพื่อฟังประโยคภาษาจีน ลองพูดตามออกเสียงทุกครั้ง</p><button class="btn" onclick="L1()">เริ่มเกม</button></div>'}
+$.innerHTML='<div class="card"><div class="hdr"><span>🌸</span><span>☀️</span><span>🍂</span><span>❄️</span></div><h1 class="zh">四季大冒险</h1><p class="py">Sìjì dà màoxiǎn</p><h2>ผจญภัยสี่ฤดู</h2><p class="mu">3 ด่าน ฟัง–แตะ–พูดตาม<br>เหมาะกับนักเรียน YCT 1 เล่นเดี่ยวหรือฉายขึ้นจอแล้วแข่งเป็นทีม</p><p class="mu" style="font-size:.9rem">💡 เปิดเสียงเพื่อฟังประโยคภาษาจีน อ่านพินอินออกเสียงทุกครั้งก่อนตอบ</p><button class="btn" onclick="L1()">เริ่มเกม</button></div>'}
 
 function L1(){sc=0;lv=1;qi=0;items=sh(P1).slice(0,8);q1()}
 function q1(){if(qi>=items.length)return L2();var it=items[qi];
-$.innerHTML=hd(qi,8)+'<div class="card"><h2>ฟังแล้วเลือกฤดูให้ตรง</h2><p class="mu">抢卡片 · เลือกเร็วได้ 2 คะแนน</p><div class="big zh">'+it.z+'</div><div class="py">'+it.p+'</div><div class="mu" style="font-size:.9rem">'+it.t+'</div><button class="say" onclick="say(\''+it.z+'\')">🔊 ฟังอีกครั้ง</button><div class="tm"><i></i></div>'+seasonBtns('a1')+'<div class="fb" id="fb"></div></div>';
-say(it.z);t0=Date.now();clearTimeout(tmr);tmr=setTimeout(function(){a1(null)},8000)}
+$.innerHTML=hd(qi,8)+'<div class="card"><h2>อ่านพินอินแล้วเลือกฤดูให้ตรง</h2><p class="mu">抢卡片 · มีเวลา 20 วินาที ตอบภายใน 10 วินาทีได้ 2 คะแนน</p><div class="big zh">'+it.z+'</div><div class="py">'+it.p+'</div><button class="say" onclick="say(\''+it.z+'\')">🔊 ฟังอีกครั้ง</button><div class="tm"><i></i></div>'+seasonBtns('a1')+'<div class="fb" id="fb"></div></div>';
+say(it.z);t0=Date.now();clearTimeout(tmr);tmr=setTimeout(function(){a1(null)},20000)}
 function a1(k){clearTimeout(tmr);var it=items[qi],ok=k===it.s,bs=$.querySelectorAll('.s');
 bs.forEach(function(b){b.disabled=true;if(b.dataset.k===it.s)b.classList.add('hit');else b.classList.add('dim')});
 var tm=$.querySelector('.tm i');if(tm)tm.style.animationPlayState='paused';
 var fb=document.getElementById('fb');
-if(ok){var g=(Date.now()-t0<4000)?2:1;sc+=g;fb.style.color='var(--ok)';fb.textContent='ถูก! +'+g+' 👏 พูดตาม: '+S[it.s].z+'！'}
+if(ok){var g=(Date.now()-t0<10000)?2:1;sc+=g;fb.style.color='var(--ok)';fb.textContent='ถูก! +'+g+' 👏 พูดตาม: '+S[it.s].z+'！'}
 else{fb.style.color='var(--no)';fb.textContent=(k?'ยังไม่ใช่ ':'หมดเวลา ')+'คำตอบคือ '+S[it.s].z}
 if(ok)say(S[it.s].z+'。');qi++;tmr=setTimeout(q1,1700)}
 
@@ -114,7 +114,7 @@ function L2(){lv=2;qi=0;items=sh(KEYS).slice(0,3);q2()}
 function q2(){if(qi>=3)return L3();var k=items[qi],s=S[k];found=0;
 var good=sh(P2.filter(function(c){return c.s===k})).slice(0,3),bad=sh(P2.filter(function(c){return c.s!==k})).slice(0,5);
 r2=sh(good.concat(bad));
-$.innerHTML=hd(qi,3)+'<div class="card"><h2>เรียงแถวฤดูกาล 排队</h2><p class="mu">แตะการ์ดทั้ง 3 ใบที่เข้ากับฤดูนี้ แล้วอ่านออกเสียง</p><div class="big zh">现在是'+s.z+'。</div><div class="py">Xiànzài shì '+s.p+'. · ตอนนี้เป็น'+s.t+'</div><button class="say" onclick="say(\'现在是'+s.z+'\')">🔊 ฟัง</button><div class="cards">'+r2.map(function(c,i){return '<button class="c" onclick="a2('+i+')"><span class="e">'+c.e+'</span><span class="z zh">'+c.z+'</span><span class="p">'+c.p+'</span></button>'}).join('')+'</div><div class="fb" id="fb"></div></div>';
+$.innerHTML=hd(qi,3)+'<div class="card"><h2>เรียงแถวฤดูกาล 排队</h2><p class="mu">แตะการ์ดทั้ง 3 ใบที่เข้ากับฤดูนี้ แล้วอ่านออกเสียง</p><div class="big zh">现在是'+s.z+'。</div><div class="py">Xiànzài shì '+s.p+'.</div><button class="say" onclick="say(\'现在是'+s.z+'\')">🔊 ฟัง</button><div class="cards">'+r2.map(function(c,i){return '<button class="c" onclick="a2('+i+')"><span class="e">'+c.e+'</span><span class="z zh">'+c.z+'</span><span class="p">'+c.p+'</span></button>'}).join('')+'</div><div class="fb" id="fb"></div></div>';
 say('现在是'+s.z)}
 function a2(i){var c=r2[i],k=items[qi],b=$.querySelectorAll('.c')[i],fb=document.getElementById('fb');
 if(c.s===k){b.classList.add('ok');sc++;found++;say(S[k].z+c.z);fb.style.color='var(--ok)';fb.textContent='ถูก! พูดตาม: '+S[k].z+c.z;
@@ -125,14 +125,14 @@ var stepB;
 function L3(){lv=3;qi=0;items=sh(P3);q3()}
 function q3(){if(qi>=items.length)return end();var it=items[qi];stepB=false;
 var o=sh([{z:it.a[0],p:it.a[1],ok:1},{z:it.w[0][0],p:it.w[0][1]},{z:it.w[1][0],p:it.w[1][1]}]);items[qi].o=o;
-$.innerHTML=hd(qi,items.length)+'<div class="card"><h2>ยิงลูกบอลตอบคำถาม 投球问答</h2><div class="big zh">'+it.q+'</div><div class="py">'+it.qp+'</div><div class="mu" style="font-size:.9rem">'+it.qt+'</div><button class="say" onclick="say(\''+it.q+'\')">🔊 ฟัง</button><div style="text-align:left" id="ops">'+o.map(function(x,i){return '<button class="opt" onclick="a3('+i+')"><span class="z zh">'+x.z+'</span><span class="p">'+x.p+'</span></button>'}).join('')+'</div><div class="fb" id="fb"></div></div>';
+$.innerHTML=hd(qi,items.length)+'<div class="card"><h2>ยิงลูกบอลตอบคำถาม 投球问答</h2><div class="big zh">'+it.q+'</div><div class="py">'+it.qp+'</div><button class="say" onclick="say(\''+it.q+'\')">🔊 ฟัง</button><div style="text-align:left" id="ops">'+o.map(function(x,i){return '<button class="opt" onclick="a3('+i+')"><span class="z zh">'+x.z+'</span><span class="p">'+x.p+'</span></button>'}).join('')+'</div><div class="fb" id="fb"></div></div>';
 say(it.q)}
 function a3(i){var it=items[qi],x=it.o[i],bs=$.querySelectorAll('.opt'),fb=document.getElementById('fb');
 bs.forEach(function(b,j){b.disabled=true;if(it.o[j].ok)b.classList.add('ok')});
 if(!x.ok){bs[i].classList.add('bad');fb.style.color='var(--no)';fb.textContent='ยังไม่ใช่ คำตอบที่ถูกคือ '+it.a[0];say(it.a[0]);qi++;setTimeout(q3,2200);return}
 sc++;say(x.z);fb.style.color='var(--ok)';fb.textContent='ตอบถูก! พูดตามแล้วยิงลูกบอลเลย 🏀';
 setTimeout(function(){basket(it)},1100)}
-function basket(it){$.querySelector('.card').innerHTML='<h2>ยิงลูกบอลเข้าตะกร้า</h2><p class="mu">ประโยคนี้เกี่ยวกับฤดูไหน?</p><div class="big zh">'+it.a[0]+'</div><div class="py">'+it.a[1]+'</div><div class="grid">'+KEYS.map(function(k){var s=S[k];return '<div class="bk"><span class="ball">🏀</span><button class="s '+s.k+'" style="width:100%" data-k="'+k+'" onclick="b3(\''+k+'\',this)"><span>🧺</span><span class="zh">'+s.z+'</span><small>'+s.t+'</small></button></div>'}).join('')+'</div><div class="fb" id="fb"></div>'}
+function basket(it){$.querySelector('.card').innerHTML='<h2>ยิงลูกบอลเข้าตะกร้า</h2><p class="mu">ประโยคนี้เกี่ยวกับฤดูไหน?</p><div class="big zh">'+it.a[0]+'</div><div class="py">'+it.a[1]+'</div><div class="grid">'+KEYS.map(function(k){var s=S[k];return '<div class="bk"><span class="ball">🏀</span><button class="s '+s.k+'" style="width:100%" data-k="'+k+'" onclick="b3(\''+k+'\',this)"><span>🧺</span><span class="zh">'+s.z+'</span><small>'+s.p+'</small></button></div>'}).join('')+'</div><div class="fb" id="fb"></div>'}
 function b3(k,el){var it=items[qi],fb=document.getElementById('fb');
 $.querySelectorAll('.s').forEach(function(b){b.disabled=true});
 if(k===it.s){sc++;el.parentNode.classList.add('go');fb.style.color='var(--ok)';fb.textContent='เข้าตะกร้า! 🎯 +1';say(S[k].z)}
